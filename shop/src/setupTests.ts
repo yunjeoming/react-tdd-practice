@@ -8,8 +8,8 @@ import { server } from './mocks/server';
 // 테스트 시작 전에 서버를 실행
 beforeAll(() => server.listen());
 
-// 리셋
+// 하나 테스트 끝나면 서버 리셋
 afterEach(() => server.resetHandlers());
 
-// 테스트 끝나고 서버 제거
-afterEach(() => server.close());
+// 모든 테스트 끝나면 서버 제거
+afterAll(() => server.close());

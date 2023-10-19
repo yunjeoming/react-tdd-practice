@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "axios": "^1.5.1",
     "eslint": "^8.51.0",
     "eslint-plugin-jest-dom": "^5.1.0",
     "eslint-plugin-testing-library": "^6.1.0"
