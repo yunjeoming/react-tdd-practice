@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Type from './Type';
+import Type from '../Type';
 import { rest } from 'msw';
-import { server } from '../../mocks/server';
+import { server } from '../../../mocks/server';
 
 test('서버로부터 이미지 가져오기', async () => {
   render(<Type orderType="products" />);
