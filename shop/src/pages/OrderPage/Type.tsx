@@ -33,9 +33,14 @@ const Type = ({ orderType }: Props) => {
 
   return (
     <div>
-      {items.map((item) => (
-        <ItemComponents key={item.name} name={item.name} imagePath={item.imagePath} />
-      ))}
+      <h2>주문 종류</h2>
+      <p>개당 가격</p>
+      <p>총 가격</p>
+      <div className={`flex ${orderType === 'products' ? 'flex-row' : 'flex-col'}`}>
+        {items.map((item) => (
+          <ItemComponents key={item.name} name={item.name} imagePath={item.imagePath} />
+        ))}
+      </div>
     </div>
   );
 };
