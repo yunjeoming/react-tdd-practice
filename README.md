@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# React test app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React testing library를 사용하여 테스트 코드를 작성합니다.
+[React testing library - github 바로가기](https://github.com/testing-library/react-testing-library)
 
-## Available Scripts
+### render 함수
 
-In the project directory, you can run:
+인자로 렌더링할 특정 컴포넌트가 필요하며 테스트를 진행할 컴포넌트를 대상으로 한다.
+render 함수는 rtl에서 제공하는 쿼리 함수와 기타 유틸리티 함수를 담고 있는 객체를 리턴한다.
+=> 소스 코드가 복잡해지면 위 리턴 객체 대신 screen 객체를 사용한다. 왜냐하면 사용해야 할 쿼리가 많아질수록 코드가 복잡해질 수 있기 때문
 
-### `npm start`
+### 쿼리 함수
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+쿼리는 페이지에서 엘리먼트를 찾기 위해 테스트 라이브러리가 제공하는 방법이다.
+여러 유형의 쿼리(get, find, query)가 있다.
+이들 간의 차이점은 엘리먼트가 발견되지 않으면 쿼리에서 오류가 발생하는지 또는 프로미스를 반환하고 다시 시도하는지다.
+선택하는 페이지 콘텐츠에 따라 다른 쿼리를 사용해야 한다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### getBy
 
-### `npm test`
+get은 쿼리에 대해 일치하는 엘리먼트를 반환하고 일치하는 엘리먼트가 없거나 둘 이상이 발견되면 오류를 발생시킨다.
+(둘 이상의 엘리먼트가 있을 경우 대신 getAllBy 사용)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### queryBy
 
-### `npm run build`
+쿼리에 대해 일치하는 엘리먼트를 반환하고 없으면 null을 반환한다.
+존재하지 않는 엘리먼트를 검증할 때 유용하다.
+둘 이상의 일치 항목이 발견되면 오류가 발생한다.
+(둘 이상의 엘리먼트가 있을 경우 대신 queryAllBy 사용)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### findBy
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+주어진 쿼리와 일치하는 엘리먼트가 발견되면 해당 프로미스를 반환한다.
+엘리먼트가 발견되지 않거나 기본 제한 시간인 1000ms 후에 둘 이상의 엘리먼트가 발견되면 프로미스가 거부된다.
+(둘 이상의 요소를 찾아야 하는 경우 findAllBy 사용)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### fireEvent & userEvent
 
-### `npm run eject`
+유저가 발생시키는 액션(이벤트)에 대한 테스트를 해야하는 경우 사용하며 특히 userEvent는 사용자의 실제 상호작용을 모방하여 테스트를 수행할 때 사용한다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Mock service worker
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+프론트엔드 요청을 가로채서 가짜 응답을 제공해주는 라이브러리다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+브라우저에 서비스 워커를 등록하여 네트워크 요청을 감지하고 이 요청이 실제 서버로 갈 때, 중간에서 가로챈 후 msw 클라이언트 사이드 라이브러리로 보낸다.
+이 후 핸들러에서 요청을 처리한 후 가짜 응답을 브라우저로 보낸다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+실제 백엔드 서버 구현 전에 프론트엔드에서 임의로 사용할 api를 구현할 때 사용하거나, 테스트 환경에서도 사용할 수 있다는 장점이 있다.
