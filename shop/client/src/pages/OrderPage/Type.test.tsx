@@ -16,7 +16,7 @@ test('서버로부터 이미지 가져오기', async () => {
 });
 
 test('제품 데이터 가져올 때 에러 처리', async () => {
-  server.resetHandlers(rest.get('http://localhost:5000/products', (req, res, ctx) => res(ctx.status(500))));
+  server.resetHandlers(rest.get('http://localhost:5001/products', (req, res, ctx) => res(ctx.status(500))));
 
   render(<Type orderType="products" />);
   const errorBanner = await screen.findByTestId('error-banner');
